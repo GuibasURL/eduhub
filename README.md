@@ -68,11 +68,3 @@ servicos/
   ranking/                # Serviço de Ranking (porta 3003)
 web/                      # páginas HTML
 ```
-
-## Cronograma
-
-| Data | Entrega |
-|---|---|
-| 16/11 e 17/11 | Domínio, funcionalidades, estilo, repositório, diagramas de Contexto e Container |
-| 23/11 e 24/11 | Diagramas de Componentes e Código |
-| 01/12, 07/12 e 08/12 | Código rodando e apresentação |
