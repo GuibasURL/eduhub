@@ -49,7 +49,7 @@ Documentação interativa em `http://localhost:3002/docs`.
 
 ## Documentação
 
-- Diagramas C4 (Structurizr DSL): [`docs/arquitetura/workspace.dsl`](docs/arquitetura/workspace.dsl) — para visualizar, cole em https://structurizr.com/dsl
+- Diagramas C4 (Structurizr DSL): [`docs/arquitetura/workspace.dsl`](docs/arquitetura/workspace.dsl) — para visualizar, cole em [https://structurizr.com/dsl](https://playground.structurizr.com)
 - Decisões arquiteturais: [`docs/decisoes/DECISOES.md`](docs/decisoes/DECISOES.md)
 - Resumo do projeto: [`docs/EduHub_Projeto.pdf`](docs/EduHub_Projeto.pdf)
 - Divisão das atividades: [`DIVISAO_ATIVIDADES.md`](DIVISAO_ATIVIDADES.md)
