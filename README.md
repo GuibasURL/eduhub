@@ -72,8 +72,9 @@ web/                      # páginas HTML
 ## Equipe
 
 | Nome | Matrícula |
-|Guilherme Sousa Baarbosa|565684|
-|Edivar Cruz Carvalho Filho|565857|
-|João Gabriel Costa Leandro|569466|
-|Paulo Sérgio Vieira de Oliveira|566589|
-|Randson da Silva Alves|568002|
+|---|---|
+| Guilherme Sousa Barbosa | 565684 |
+| Edivar Cruz Carvalho Filho | 565857 |
+| João Gabriel Costa Leandro | 569466 |
+| Paulo Sérgio Vieira de Oliveira | 566589 |
+| Randson da Silva Alves | 568002 |
