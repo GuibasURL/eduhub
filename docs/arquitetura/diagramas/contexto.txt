@@ -1,0 +1,58 @@
+workspace "EduHub SOA" "O Serviço de Certificados é o único também usado por fora do EduHub" {
+
+    model {
+        // Atores (Pessoas)
+        instrutor = person "Instrutor" "Pessoa"
+        aluno = person "Aluno" "Pessoa"
+        qualquerPessoa = person "Qualquer pessoa" "Pessoa"
+        
+        // Sistemas Externos
+        outrosSistemas = softwareSystem "Outros sistemas" "Sistema externo" "External"
+
+        // Fronteira da Plataforma (Main System)
+        plataformaEduHub = softwareSystem "Plataforma EduHub (SOA)" {
+            servicoAcademico = container "EduHub (Serviço Acadêmico)" "Cursos, aulas, progresso, feedback" "Service"
+            servicoRanking = container "Serviço de Ranking" "Pontos e ranking" "Service"
+            servicoCertificados = container "Serviço de Certificados" "Reutilizável" "Service" "Highlight"
+        }
+
+        // Relacionamentos com o Serviço Acadêmico
+        instrutor -> servicoAcademico "Cadastra cursos e aulas / Consulta feedback"
+        aluno -> servicoAcademico "Acessa aulas, conclui e avalia / Recebe progresso e certificado"
+        
+        // Relacionamentos internos da Plataforma
+        servicoAcademico -> servicoRanking "Registra pontos / Consulta ranking"
+        servicoAcademico -> servicoCertificados "Emite certificado"
+        
+        // Relacionamentos externos com o Serviço de Certificados
+        qualquerPessoa -> servicoCertificados "Valida pelo código"
+        outrosSistemas -> servicoCertificados "Emite e valida certificados"
+    }
+
+    views {
+        container plataformaEduHub "DiagramaDeServicos" "Arquitetura SOA do EduHub" {
+            include *
+            // autoLayout tb  <-- Mantido comentado para poder arrastar os blocos
+        }
+
+        styles {
+            element "Element" {
+                shape RoundedBox
+                background #ffffff
+                color #000000
+                border solid
+            }
+            element "Person" {
+                shape Person
+            }
+            element "External" {
+                border dashed
+            }
+            element "Highlight" {
+                background #e3f2fd
+                border solid
+                color #000000
+            }
+        }
+    }
+}

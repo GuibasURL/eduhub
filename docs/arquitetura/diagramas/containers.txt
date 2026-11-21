@@ -1,0 +1,75 @@
+workspace "EduHub" "A Aplicação Web só fala com o Acadêmico, que orquestra Ranking e Certificados" {
+
+    model {
+        // Atores
+        instrutor = person "Instrutor" "Cursos e aulas"
+        aluno = person "Aluno" "Estuda e avalia"
+        qualquerPessoa = person "Qualquer pessoa" "Valida certificados"
+        
+        // Sistemas Externos
+        outrosSistemas = softwareSystem "Outros sistemas" "Sistema externo" "External"
+
+        // Sistema Principal (EduHub)
+        eduHub = softwareSystem "Sistema EduHub" {
+            aplicacaoWeb = container "Aplicação Web" "HTML + JavaScript" "Web Application"
+            
+            servicoRanking = container "Serviço de Ranking" "Pontos e ranking" "Microservice"
+            servicoAcademico = container "Serviço Acadêmico" "Orquestrador" "Microservice"
+            servicoCertificados = container "Serviço de Certificados" "Reutilizável" "Microservice Highlight"
+            
+            // Bancos de dados corrigidos para assumir a tag "Database"
+            bancoRanking = container "Banco de Ranking" "" "" "Database"
+            bancoAcademico = container "Banco Acadêmico" "" "" "Database"
+            bancoCertificados = container "Banco de Certificados" "" "" "Database"
+        }
+
+        // Relacionamentos Externos
+        instrutor -> aplicacaoWeb "Usa"
+        aluno -> aplicacaoWeb "Usa"
+        qualquerPessoa -> aplicacaoWeb "Valida pelo código"
+        outrosSistemas -> servicoCertificados "Usa a API"
+
+        // Relacionamentos Internos
+        aplicacaoWeb -> servicoAcademico "HTTP/JSON"
+        
+        // Relacionamentos com os microserviços (Retry e Circuit Breaker)
+        servicoAcademico -> servicoRanking "REST/JSON síncrono"
+        servicoAcademico -> servicoCertificados "REST/JSON síncrono"
+        
+        // Relacionamentos com os bancos de dados
+        servicoRanking -> bancoRanking "Lê e escreve"
+        servicoAcademico -> bancoAcademico "Lê e escreve"
+        servicoCertificados -> bancoCertificados "Lê e escreve"
+        aplicacaoWeb -> servicoRanking "REST/JSON síncrono""
+        aplicacaoWeb -> servicoCertificados "REST/JSON síncrono"
+    }
+
+    views {
+        container eduHub "DiagramaDeContainers" "Arquitetura do Sistema EduHub" {
+            include *
+            // autoLayout tb  <-- Mantido comentado para permitir mover os blocos manualmente
+        }
+
+        styles {
+            element "Element" {
+                shape RoundedBox
+                background #ffffff
+                color #000000
+                border solid
+            }
+            element "Person" {
+                shape Person
+            }
+            element "Database" {
+                shape Cylinder
+            }
+            element "External" {
+                border dashed
+            }
+            element "Highlight" {
+                background #e3f2fd
+                border solid
+            }
+        }
+    }
+}
